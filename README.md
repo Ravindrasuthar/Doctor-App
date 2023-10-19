@@ -107,4 +107,69 @@ This implementation demonstrates a basic setup for a REST API controller in Spri
 
 _**Services**:_ The services layer contains the business logic of the application. It receives requests from the controller, performs necessary computations or data manipulations, and interacts with the repository layer to access data.
 ```java
+@Service
+public class AppointmentService {
+
+    @Autowired
+    IAppointmentRepo appointmentRepo;
+    @Autowired
+    IPatientRepo patientRepo;
+    @Autowired
+    IDoctorRepo doctorRepo;
+    @Autowired
+    PTokenService pTokenService;
 ```
+
+```java
+@Service
+public class PatientService {
+
+    @Autowired
+    IPatientRepo patientRepo;
+    @Autowired
+    PTokenService pTokenService;
+```
+
+```java
+@Service
+public class DoctorService {
+
+    @Autowired
+    IDoctorRepo doctorRepo;
+    @Autowired
+    PTokenService pTokenService;
+```
+
+```java
+@Service
+public class PTokenService {
+    
+    @Autowired
+    IPTokenRepo ipTokenRepo;
+
+    public void createToken(PatientAuthenticationToken token) {
+        ipTokenRepo.save(token);
+    }
+```
+
+_**Repository:**_ The repository layer is responsible for interacting with the database. It uses Spring Data JPA to perform CRUD (create, read, update, delete) operations on entities.
+
+In the application.properties all the text required for connection with MySQL database are written.
+```java
+spring.datasource.url=jdbc:mysql://localhost:3306/docAppointmentDB_fs_11
+spring.datasource.username=root
+spring.datasource.password=ina728dg
+spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.use_sql_comments=true
+spring.jpa.properties.hibernate.format_sql=true
+
+```
+
+# Database Structure Used
+I have used MySQL as DataBase
+
+# Project Summary
+In this project i have created different endpoints, custom finders, Validation, @OneToOne, @ManyToOne and @OneToMany mapping.
