@@ -167,6 +167,27 @@ spring.jpa.properties.hibernate.use_sql_comments=true
 spring.jpa.properties.hibernate.format_sql=true
 
 ```
+I have used EmailService class to send the token to the patient email when He/She will login using email and password.
+```java
+public class EmailService {
+
+    private static final String EMAIL_USERNAME = "mainakgh1@gmail.com";
+    private static final String EMAIL_PASSWORD = "eige yneu huem bhzz";
+```
+I have used PasswordEncryptor class to encrypt the password.
+```java
+public class PasswordEncryptor {
+
+    public static String encrypt(String unHashedPassword) throws NoSuchAlgorithmException {
+        MessageDigest md5=MessageDigest.getInstance("MD5");
+
+        md5.update(unHashedPassword.getBytes());
+        byte[]digested=md5.digest();
+        return DatatypeConverter.printHexBinary(digested);
+
+    }
+}
+```
 
 # Database Structure Used
 I have used MySQL as DataBase
